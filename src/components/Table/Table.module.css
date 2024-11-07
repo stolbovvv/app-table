@@ -1,0 +1,42 @@
+/* Component: Table */
+
+.table {
+	display: grid;
+}
+
+.table__head {
+	display: grid;
+	border: 1px solid var(--clr-primary-6);
+	border-radius: var(--radius-md);
+	background-color: var(--clr-primary-2);
+}
+
+.table__head-row {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	padding: var(--spacing-sm);
+}
+
+.table__head-cell {
+	padding: var(--spacing-sm);
+	color: var(--clr-primary-11);
+	line-height: var(--line-height-tight);
+	font-weight: var(--font-weight-bold);
+}
+
+.table__body {
+	display: grid;
+}
+
+.table__body-row {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	padding-inline: var(--spacing-sm);
+}
+
+.table__body-cell {
+	padding: var(--spacing-sm);
+	border-bottom: 1px solid var(--clr-primary-6);
+	font-weight: var(--font-weight-light);
+	font-size: var(--font-size-sm);
+}

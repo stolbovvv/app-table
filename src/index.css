@@ -1,3 +1,90 @@
+/* Custom properties */
+
+:root {
+	--clr-neutral-1: #fdfdfc;
+	--clr-neutral-2: #f9f9f8;
+	--clr-neutral-3: #f1f0ef;
+	--clr-neutral-4: #e9e8e6;
+	--clr-neutral-5: #e2e1de;
+	--clr-neutral-6: #dad9d6;
+	--clr-neutral-7: #cfceca;
+	--clr-neutral-8: #bcbbb5;
+	--clr-neutral-9: #8d8d86;
+	--clr-neutral-10: #82827c;
+	--clr-neutral-11: #63635e;
+	--clr-neutral-12: #21201c;
+
+	--clr-primary-1: #fefdfb;
+	--clr-primary-2: #fefbe9;
+	--clr-primary-3: #fff7c2;
+	--clr-primary-4: #ffee9c;
+	--clr-primary-5: #fbe577;
+	--clr-primary-6: #f3d673;
+	--clr-primary-7: #e9c162;
+	--clr-primary-8: #e2a336;
+	--clr-primary-9: #ffc53d;
+	--clr-primary-10: #ffba18;
+	--clr-primary-11: #ab6400;
+	--clr-primary-12: #4f3422;
+
+	--clr-success-1: #fbfefc;
+	--clr-success-2: #f4fbf6;
+	--clr-success-3: #e6f6eb;
+	--clr-success-4: #d6f1df;
+	--clr-success-5: #c4e8d1;
+	--clr-success-6: #adddc0;
+	--clr-success-7: #8eceaa;
+	--clr-success-8: #5bb98b;
+	--clr-success-9: #30a46c;
+	--clr-success-10: #2b9a66;
+	--clr-success-11: #218358;
+	--clr-success-12: #193b2d;
+
+	--clr-danger-1: #fffcfc;
+	--clr-danger-2: #fff8f7;
+	--clr-danger-3: #feebe7;
+	--clr-danger-4: #ffdcd3;
+	--clr-danger-5: #ffcdc2;
+	--clr-danger-6: #fdbdaf;
+	--clr-danger-7: #f5a898;
+	--clr-danger-8: #ec8e7b;
+	--clr-danger-9: #e54d2e;
+	--clr-danger-10: #dd4425;
+	--clr-danger-11: #d13415;
+	--clr-danger-12: #5c271f;
+
+	--font-family-base: "Inter Variable", sans-serif;
+
+	--font-size-xs: 0.75rem;
+	--font-size-sm: 0.875rem;
+	--font-size-md: 1rem;
+	--font-size-lg: 1.25rem;
+	--font-size-xl: 1.5rem;
+	--font-size-2xl: 2.25rem;
+
+	--line-height-tight: 1.2;
+	--line-height-normal: 1.5;
+
+	--font-weight-light: 300;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-bold: 700;
+
+	--spacing-xs: 0.25rem;
+	--spacing-sm: 0.5rem;
+	--spacing-md: 1rem;
+	--spacing-lg: 1.5rem;
+	--spacing-xl: 2rem;
+
+	--radius-sm: 0.125rem;
+	--radius-md: 0.25rem;
+	--radius-lg: 0.5rem;
+
+	--transition-fast: 0.2s ease-in-out;
+	--transition-medium: 0.4s ease-in-out;
+	--transition-slow: 0.6s ease-in-out;
+}
+
 /* Global styles */
 
 *,
@@ -25,11 +112,17 @@ html {
 
 body {
 	min-height: 100vh;
-	line-height: 1.5;
-	font-weight: 400;
-	font-size: 1rem;
-	font-family: Arial, Helvetica, sans-serif;
+	background-color: var(--clr-primary-1);
+	color: var(--clr-neutral-12);
+	line-height: var(--line-height-normal);
+	font-weight: var(--font-weight-normal);
+	font-size: var(--font-size-md);
+	font-family: var(--font-family-base);
 	text-rendering: optimizeSpeed;
+}
+
+body:has(dialog[open]) {
+	overflow: hidden;
 }
 
 img,

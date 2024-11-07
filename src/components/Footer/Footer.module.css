@@ -1,0 +1,14 @@
+/* Component: Footer */
+
+.footer {
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: space-between;
+	padding-block: var(--spacing-sm);
+}
+
+.footer__text {
+	color: var(--clr-neutral-11);
+	font-weight: var(--font-weight-light);
+	font-size: var(--font-size-sm);
+}

@@ -1,0 +1,32 @@
+/* Component: Header */
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap: var(--spacing-xs);
+	padding-block: var(--spacing-md);
+}
+
+.header__masthead {
+	display: grid;
+	gap: var(--spacing-xs);
+}
+
+.header__heading {
+	color: var(--clr-primary-11);
+	line-height: var(--line-height-tight);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-xl);
+}
+
+.header__summary {
+	font-weight: var(--font-weight-light);
+	font-size: var(--font-size-sm);
+}
+
+.header__controls {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-md);
+}
