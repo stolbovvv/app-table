@@ -1,0 +1,16 @@
+.app {
+	display: grid;
+	place-content: center;
+	height: 100vh;
+	text-align: center;
+}
+
+.app h1 {
+	font-weight: 900;
+	font-size: 3rem;
+}
+
+.app p {
+	opacity: 0.5;
+	font-size: 1.125rem;
+}
