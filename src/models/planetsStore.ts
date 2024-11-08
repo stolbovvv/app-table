@@ -54,12 +54,12 @@ class PlanetsStore {
 		}
 	}
 
-	fetchPlanets = async () => {
+	fetchPlanets = async (page?: string) => {
 		this.state.error = null;
 		this.state.isLoading = true;
 
 		try {
-			this.state.data = await getPlanets();
+			this.state.data = await getPlanets(page);
 		} catch (error) {
 			this.state.error = error instanceof Error ? error.message : 'Неизвестная ошибка';
 		} finally {

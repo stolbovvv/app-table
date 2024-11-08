@@ -18,8 +18,8 @@ async function getData<T>(endpoint: string): Promise<T> {
 	}
 }
 
-export const getPlanets = async (): Promise<PlanetList> => {
-	const { count, next, previous, results } = await getData<PlanetList>('planets');
+export const getPlanets = async (page?: string): Promise<PlanetList> => {
+	const { count, next, previous, results } = await getData<PlanetList>(`planets/?page=${page || '1'}`);
 
 	return {
 		count,

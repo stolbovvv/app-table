@@ -1,0 +1,7 @@
+/* Component: Pagination */
+
+.pagination {
+	display: flex;
+	place-content: center;
+	gap: var(--spacing-sm);
+}
