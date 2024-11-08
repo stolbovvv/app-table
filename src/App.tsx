@@ -1,5 +1,5 @@
 import styles from './App.module.css';
-import { Footer, Header, Table } from '@/components';
+import { Dialog, Footer, Header, Table } from '@/components';
 
 export function App() {
 	return (
@@ -11,6 +11,7 @@ export function App() {
 				</main>
 				<Footer />
 			</div>
+			<Dialog />
 		</>
 	);
 }

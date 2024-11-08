@@ -1,11 +1,20 @@
 import { makeAutoObservable } from 'mobx';
 import { getPlanets } from '@/services/swapiService';
-import { generateInitialData, type PlanetList } from '@/entities/planetsTypes';
+import { generateInitialData, Planet, type PlanetList } from '@/entities/planetsTypes';
 
 interface PlanetsStoreState {
 	data: PlanetList;
 	error: string | null;
 	isLoading: boolean;
+	sorting: {
+		field: keyof Omit<Planet, 'id'> | null;
+		direction: 'asc' | 'desc' | null;
+	};
+	deletingDialog: {
+		isOpen: boolean;
+		planetId: string | null;
+		planetName: string | null;
+	};
 }
 
 class PlanetsStore {
@@ -13,6 +22,15 @@ class PlanetsStore {
 		data: generateInitialData(),
 		error: null,
 		isLoading: false,
+		sorting: {
+			field: null,
+			direction: null,
+		},
+		deletingDialog: {
+			isOpen: false,
+			planetId: null,
+			planetName: null,
+		},
 	};
 
 	constructor() {
@@ -34,6 +52,56 @@ class PlanetsStore {
 
 	cleanPlanets = () => {
 		this.state.data = generateInitialData();
+	};
+
+	deletePlanetById = (id: string) => {
+		this.state.data.results = this.state.data.results.filter((item) => item.id !== id);
+		this.closeDeletingDialog();
+	};
+
+	openDeletingDialog = (id: string) => {
+		this.state.deletingDialog.isOpen = true;
+		this.state.deletingDialog.planetId = id;
+		this.state.deletingDialog.planetName = this.state.data.results.filter((item) => item.id === id)[0].name;
+	};
+
+	closeDeletingDialog = () => {
+		this.state.deletingDialog.isOpen = false;
+		this.state.deletingDialog.planetId = null;
+		this.state.deletingDialog.planetName = null;
+	};
+
+	sortPlanets = (field: keyof Omit<Planet, 'id'>) => {
+		if (this.state.data.results.length === 0) return;
+
+		if (this.state.sorting.field !== field) {
+			this.state.sorting.direction = 'asc';
+			this.state.sorting.field = field;
+		} else {
+			switch (this.state.sorting.direction) {
+				case 'asc':
+					this.state.sorting.direction = 'desc';
+					break;
+
+				case 'desc':
+					this.state.sorting.direction = 'asc';
+					break;
+			}
+		}
+
+		const sortedResult = [...this.state.data.results].sort((a, b) => {
+			const prevValue = String(a[field]);
+			const nextValue = String(b[field]);
+
+			let directionFactor = 1;
+
+			if (this.state.sorting.direction === 'asc') directionFactor = 1;
+			if (this.state.sorting.direction === 'desc') directionFactor = -1;
+
+			return prevValue.localeCompare(nextValue) * directionFactor;
+		});
+
+		this.state.data.results = sortedResult;
 	};
 }
 
