@@ -40,3 +40,21 @@
 	font-weight: var(--font-weight-light);
 	font-size: var(--font-size-sm);
 }
+
+.table__loading {
+	margin-top: var(--spacing-xl);
+	color: var(--clr-neutral-11);
+	text-align: center;
+}
+
+.table__error {
+	margin-top: var(--spacing-xl);
+	color: var(--clr-danger-11);
+	text-align: center;
+}
+
+.table__message {
+	margin-top: var(--spacing-xl);
+	color: var(--clr-primary-11);
+	text-align: center;
+}
