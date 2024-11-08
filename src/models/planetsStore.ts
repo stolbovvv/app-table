@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS } from 'mobx';
 import { getPlanets } from '@/services/swapiService';
 import { generateInitialData, Planet, type PlanetList } from '@/entities/planetsTypes';
 
@@ -35,6 +35,23 @@ class PlanetsStore {
 
 	constructor() {
 		makeAutoObservable(this);
+		this.loadStateFromLocalStorage();
+	}
+
+	saveStateToLocalStorage() {
+		const stateToSave = toJS(this.state);
+		localStorage.setItem('planetsStore', JSON.stringify(stateToSave));
+	}
+
+	loadStateFromLocalStorage() {
+		const savedState = localStorage.getItem('planetsStore');
+		if (savedState) {
+			try {
+				this.state = JSON.parse(savedState);
+			} catch (error) {
+				console.error('Ошибка загрузки состояния из localStorage:', error);
+			}
+		}
 	}
 
 	fetchPlanets = async () => {
@@ -47,28 +64,33 @@ class PlanetsStore {
 			this.state.error = error instanceof Error ? error.message : 'Неизвестная ошибка';
 		} finally {
 			this.state.isLoading = false;
+			this.saveStateToLocalStorage();
 		}
 	};
 
 	cleanPlanets = () => {
 		this.state.data = generateInitialData();
+		this.saveStateToLocalStorage();
 	};
 
 	deletePlanetById = (id: string) => {
 		this.state.data.results = this.state.data.results.filter((item) => item.id !== id);
 		this.closeDeletingDialog();
+		this.saveStateToLocalStorage();
 	};
 
 	openDeletingDialog = (id: string) => {
 		this.state.deletingDialog.isOpen = true;
 		this.state.deletingDialog.planetId = id;
 		this.state.deletingDialog.planetName = this.state.data.results.filter((item) => item.id === id)[0].name;
+		this.saveStateToLocalStorage();
 	};
 
 	closeDeletingDialog = () => {
 		this.state.deletingDialog.isOpen = false;
 		this.state.deletingDialog.planetId = null;
 		this.state.deletingDialog.planetName = null;
+		this.saveStateToLocalStorage();
 	};
 
 	sortPlanets = (field: keyof Omit<Planet, 'id'>) => {
@@ -102,6 +124,7 @@ class PlanetsStore {
 		});
 
 		this.state.data.results = sortedResult;
+		this.saveStateToLocalStorage();
 	};
 }
 
